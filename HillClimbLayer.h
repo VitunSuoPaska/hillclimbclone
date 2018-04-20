@@ -13,6 +13,7 @@ namespace hillclimb {
 
     class HillClimbLayer : public cocos2d::Layer {
     public:
+        cocos2d::PhysicsBody* body;
         static cocos2d::Scene* createWithPhysics();
         virtual bool init();
         CREATE_FUNC(HillClimbLayer);

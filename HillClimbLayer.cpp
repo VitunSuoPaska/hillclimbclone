@@ -34,6 +34,10 @@ namespace hillclimb {
         this->carStartY = winSize.height / 2.0 + carSize.height;
         this->carSprite->setPosition(carStartX, carStartY);
         this->carSprite->setAnchorPoint(cocos2d::Vec2(0.5, 0.5));
+        
+        body = cocos2d::PhysicsBody::createBox(carSize);
+        
+        this->carSprite->setPhysicsBody(body);
         this->addChild(this->carSprite, 0);
     
         //Initialize car field here. Arguments: carStartX, carStartY, spriteScale
@@ -125,6 +129,9 @@ namespace hillclimb {
         if (isKeyPressed(cocos2d::EventKeyboard::KeyCode::KEY_RIGHT_ARROW)) {
             this->car->updateThrottle(10);
             this->road->move(10);
+            //this should probably be applyForce
+            this->body->setVelocity(cocos2d::Vec2(10,0));
+            //carSprite.physicsBody.force = cocos2d::Vec2(10,900);
             //Speed the car up with the updateThrottle method
         } else if (isKeyPressed(cocos2d::EventKeyboard::KeyCode::KEY_LEFT_ARROW)) {
             //Put the brake on with the updateThrottle method
@@ -152,7 +159,7 @@ namespace hillclimb {
 
     cocos2d::Scene* HillClimbLayer::createWithPhysics() {
         auto scene = cocos2d::Scene::createWithPhysics();
-        //scene->getPhysicsWorld()->setGravity(-900);
+        scene->getPhysicsWorld()->setGravity(cocos2d::Vec2(0, -900));
         auto layer = HillClimbLayer::create();
 
         scene->addChild(layer);

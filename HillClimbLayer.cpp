@@ -7,6 +7,7 @@
 #include "HillClimbLayer.h"
 #include "HillClimbUtility.h"
 #include "HillClimbRoad.h"
+#include <cmath>
 // Add missing includes here.
 
 namespace hillclimb {
@@ -122,7 +123,7 @@ namespace hillclimb {
     void HillClimbLayer::update(float dt) {
         cocos2d::Node::update(dt);
         if (isKeyPressed(cocos2d::EventKeyboard::KeyCode::KEY_RIGHT_ARROW)) {
-            //this->car->updateThrottle(10);
+            this->car->updateThrottle(10);
             this->road->move(10);
             //Speed the car up with the updateThrottle method
         } else if (isKeyPressed(cocos2d::EventKeyboard::KeyCode::KEY_LEFT_ARROW)) {
@@ -149,8 +150,9 @@ namespace hillclimb {
         //Set sprite rotation with setRotation(angle / STRAIGHT_ANGLE * 180);
     }
 
-    cocos2d::Scene* HillClimbLayer::createScene() {
-        auto scene = cocos2d::Scene::create();
+    cocos2d::Scene* HillClimbLayer::createWithPhysics() {
+        auto scene = cocos2d::Scene::createWithPhysics();
+        //scene->getPhysicsWorld()->setGravity(-900);
         auto layer = HillClimbLayer::create();
 
         scene->addChild(layer);

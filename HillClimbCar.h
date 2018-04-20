@@ -13,6 +13,8 @@ namespace hillclimb{
         HillClimbCar(int, int, int);
         //update(road, dt);
         void updateThrottle(double);
+        
+        void updatePosY(double);
 
 };
 }

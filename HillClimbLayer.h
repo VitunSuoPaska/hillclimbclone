@@ -13,7 +13,7 @@ namespace hillclimb {
 
     class HillClimbLayer : public cocos2d::Layer {
     public:
-        static cocos2d::Scene* createScene();
+        static cocos2d::Scene* createWithPhysics();
         virtual bool init();
         CREATE_FUNC(HillClimbLayer);
         virtual void update(float delta) override;

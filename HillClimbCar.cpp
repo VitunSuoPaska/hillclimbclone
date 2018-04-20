@@ -3,13 +3,22 @@
 
 namespace hillclimb{
 
-    
-      HillClimbCar::HillClimbCar(int x, int y, int scale)
+        int y = 0;
+        HillClimbCar::HillClimbCar(int x, int y, int scale)
         :x(x), y(y), scale(scale) {}
+      
+        void HillClimbCar::updateThrottle(double throttle){
+            
+        }
+        
+        void updatePoxY (double Y)
+        {
+            y = Y;
+        }
 /*
     function updateVelocityX
 
-    function updatePosY
+    
 
     function updateVelocityY
 
@@ -102,9 +111,7 @@ namespace hillclimb{
         this->a_y = residualForceY;
     }
 */
-    void updateThrottle(double throttle){
-        
-    }
+
 /*
     function getTransitionX
 

@@ -48,7 +48,7 @@ namespace hillclimb {
         register_all_packages();
         std::srand(std::time(NULL));
 
-        auto scene = HillClimbLayer::createScene();
+        auto scene = HillClimbLayer::createWithPhysics();
         director->runWithScene(scene);
 
         return true;

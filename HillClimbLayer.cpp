@@ -106,13 +106,18 @@ namespace hillclimb {
         auto coordinates = partCoords.at(i);
         auto coordinates2 = partCoords.at(i+1);
         //partCoords.pop_back();
+            
             drawNode->drawLine(cocos2d::Point(coordinates.x, coordinates.y),
             cocos2d::Point(coordinates2.x, coordinates2.y),
             cocos2d::Color4F::WHITE);
             
+            
+            auto roadPoint = cocos2d::Point(coordinates.x, coordinates.y);
             //previousX = coordinates.x;
             //previousY = coordinates.y;
         }
+        
+        //auto roadBody = cocos2d::PhysicsBody::createEdgeChain(roadPoint, road->getPartCount(), 1);
         
         this->addChild(drawNode);
             //beginCoords = partCoordPair at current index

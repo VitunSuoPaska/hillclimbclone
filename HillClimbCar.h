@@ -1,14 +1,25 @@
-/* Guards
+#ifndef __HILLCLIMB_CAR_H__
+#define __HILLCLIMB_CAR_H__
 
-includes 
+#include "HillClimbUtility.h"
 
-namespace
+namespace hillclimb{
 
-    class HillClimbCar
-      public
-        HillClimbCar(x, y, scale)
-        update(road, dt)
-        updateThrottle(dthrottle)
+    class HillClimbCar{
+    public:
+        int x;
+        int y;
+        int scale;
+        HillClimbCar(int, int, int);
+        //update(road, dt);
+        void updateThrottle(double);
+
+};
+}
+
+#endif // __HILLCLIMB_LAYER_H__
+
+/*
         getPositionY()
         getTransitionX(dt)
         getAngle()

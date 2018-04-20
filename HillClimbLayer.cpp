@@ -6,6 +6,7 @@
 #include "cocos2d.h"
 #include "HillClimbLayer.h"
 #include "HillClimbUtility.h"
+#include "HillClimbRoad.h"
 // Add missing includes here.
 
 namespace hillclimb {
@@ -36,6 +37,11 @@ namespace hillclimb {
     
         //Initialize car field here. Arguments: carStartX, carStartY, spriteScale
         //Initialize road field here. Arguments: winWidth, winHeight
+        
+         //hillclimb::HillClimbRoad hillClimbRoad(5,5);
+        
+        this->road = std::unique_ptr<HillClimbRoad>(new HillClimbRoad(5,5));
+        this->car = std::unique_ptr<HillClimbCar>(new HillClimbCar(2,2,100));
         this->generateRoadParts();
 
         auto eventListener = cocos2d::EventListenerKeyboard::create();
@@ -60,7 +66,25 @@ namespace hillclimb {
         return false;
     }
 
+    
+   
+    
     void HillClimbLayer::generateRoadParts() {
+        
+        if(road->getPartCount() == 0)
+        {
+            //std::cout << hillClimbRoad.getPartCount();
+            int x = 0;
+            int y = 650;
+            for(int i = 0; i < 20; i++)
+            {
+            road->addPart(x,y);
+            x = x + rand() % 400;
+            y = y - rand() % 200;
+            y = y + rand() % 200;
+            }
+        }
+        
         //MIN_ROAD_SIZE = 2
         //get part count of road
         //get part coordinate pairs of road
@@ -70,14 +94,25 @@ namespace hillclimb {
 
         auto drawNode = cocos2d::DrawNode::create();
         drawNode->setName("drawNode");
-        /*Loop through partCoordPairs:
-            beginCoords = partCoordPair at current index
-            endCoords = partCoordPair at current index + 1
-            drawNode->drawLine(cocos2d::Point(x of beginCoords, y of beginCoords),
-            cocos2d::Point(x of endCoords, y of endCoords),
+        
+        for(int i = 0; i < road->getPartCount() -1; i++)
+        {
+        std::vector<Coordinates> partCoords = road->getPartCoords();
+        auto coordinates = partCoords.at(i);
+        auto coordinates2 = partCoords.at(i+1);
+        //partCoords.pop_back();
+            drawNode->drawLine(cocos2d::Point(coordinates.x, coordinates.y),
+            cocos2d::Point(coordinates2.x, coordinates2.y),
             cocos2d::Color4F::WHITE);
-        */
+            
+            //previousX = coordinates.x;
+            //previousY = coordinates.y;
+        }
+        
         this->addChild(drawNode);
+            //beginCoords = partCoordPair at current index
+            //endCoords = partCoordPair at current index + 1
+            
     }
 
     void HillClimbLayer::deleteRoadParts() {
@@ -87,6 +122,8 @@ namespace hillclimb {
     void HillClimbLayer::update(float dt) {
         cocos2d::Node::update(dt);
         if (isKeyPressed(cocos2d::EventKeyboard::KeyCode::KEY_RIGHT_ARROW)) {
+            //this->car->updateThrottle(10);
+            this->road->move(10);
             //Speed the car up with the updateThrottle method
         } else if (isKeyPressed(cocos2d::EventKeyboard::KeyCode::KEY_LEFT_ARROW)) {
             //Put the brake on with the updateThrottle method

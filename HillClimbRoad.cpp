@@ -1,16 +1,46 @@
-/* Includes
+#include <vector>
+#include "HillClimbRoad.h"
+#include "HillClimbUtility.h"
 
-namespace
+namespace hillclimb {
+     
+   double ROAD_LENGHT_FACTOR = 5; 
 
-   ROAD_LENGHT_FACTOR = choose some road length factor
-
-   HillClimbRoad constructor
-
+   HillClimbRoad::HillClimbRoad(int W, int H)
+   :width(W), height(H) {}
+   
+   int HillClimbRoad::getPartCount() {
+       return static_cast<int>(this->partCoords.size());
+   }
+   
+   std::vector<Coordinates> HillClimbRoad::getPartCoords(){
+       return this->partCoords;
+   }
+   
+   void HillClimbRoad::addPart(double x, double y)
+   {
+       Coordinates partCoord = {
+           .x = x,
+           .y = y
+       };
+       this->partCoords.push_back(partCoord);
+               
+   }
+   
+   void HillClimbRoad::move(double x)
+   {
+       for(auto &coords: this->partCoords)
+       {
+           coords.x -=x;
+       }
+   }
+}
+/*
    function getPartCount
 
    function getPartCoords
 
-   function addPart
+   
 
    function calculateNewPartX {
        randomize length of the new part using some factor
@@ -34,9 +64,9 @@ namespace
        generatePartsAhead
    }
 
-   reset
+   reset{
        clear partCoords
        add two horizontal parts
        generatePartsAhead
    }
-*/
+}*/

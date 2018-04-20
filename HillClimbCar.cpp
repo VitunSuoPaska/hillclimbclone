@@ -1,11 +1,12 @@
+#include "HillClimbCar.h"
+#include "HillClimbRoad.h"
+
+namespace hillclimb{
+
+    
+      HillClimbCar::HillClimbCar(int x, int y, int scale)
+        :x(x), y(y), scale(scale) {}
 /*
-
-Includes
-
-namespace
-
-    HillClimbCar constructor
-
     function updateVelocityX
 
     function updatePosY
@@ -100,9 +101,11 @@ namespace
         this->a_x = residualForceX;
         this->a_y = residualForceY;
     }
-
-    function updateThrottle
-
+*/
+    void updateThrottle(double throttle){
+        
+    }
+/*
     function getTransitionX
 
     function getPositionY
@@ -126,5 +129,5 @@ namespace
    reset {
         fundamental type fields back to their original values
         clear previous state of wheels
-   }
-*/
+   }*/
+}
